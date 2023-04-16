@@ -1,7 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { NextPage } from 'next';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import TagsListBox from '../listbox';
+import BasicDatePicker from './date-picker';
 
 type Props = {
   isOpen: boolean | any;
@@ -80,22 +81,37 @@ const Modal: NextPage<Props> = (props) => {
                         placeholder='Leave task description here...'
                       ></textarea>
                       <label
-                        htmlFor='end-date'
+                        htmlFor='tags'
                         className='block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white'
                       >
                         Tags
                       </label>
                       <TagsListBox />
+                      <label
+                        htmlFor='end-date'
+                        className='block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white'
+                      >
+                        End Date
+                      </label>
+                      <BasicDatePicker />
                     </form>
                   </div>
 
-                  <div className='mt-4'>
+                  <div className='mt-4 flex justify-end'>
                     <button
                       type='button'
-                      className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                      className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
                       onClick={props.closeModal}
                     >
-                      Got it, thanks!
+                      Cancel
+                    </button>
+
+                    <button
+                      type='button'
+                      className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ml-4'
+                      onClick={props.closeModal}
+                    >
+                      Add Item
                     </button>
                   </div>
                 </Dialog.Panel>
