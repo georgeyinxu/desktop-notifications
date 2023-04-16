@@ -1,13 +1,6 @@
-import '@/styles/globals.css';
-import { Fragment } from 'react';
-import Home from '.';
+import '@/styles/globals.css'
+import type { AppProps } from 'next/app'
 
-const App = () => {
-  return (
-    <Fragment>
-      <Home />
-    </Fragment>
-  );
-};
-
-export default App;
+export default function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}

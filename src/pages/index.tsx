@@ -1,6 +1,5 @@
 import React from "react";
 import { Fragment } from "react";
-
 import Sidebar from "@/components/sidebar";
 import Body from "@/components/dashboard/body";
 
