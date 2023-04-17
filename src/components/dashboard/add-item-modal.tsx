@@ -1,15 +1,56 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { NextPage } from 'next';
-import { Fragment } from 'react';
+import { Fragment, FunctionComponent, useState } from 'react';
 import TagsListBox from '../listbox';
 import BasicDatePicker from './date-picker';
+import dayjs, { Dayjs } from 'dayjs';
+import React from 'react';
+
+type ListItem = {
+  name: string;
+  description: string;
+  tag: string;
+  date: dayjs.Dayjs;
+};
 
 type Props = {
   isOpen: boolean | any;
   closeModal: (value: boolean) => void;
+  listItems: ListItem[];
+  setListItems: React.Dispatch<React.SetStateAction<ListItem[]>>
 };
 
-const Modal: NextPage<Props> = (props) => {
+const Modal: FunctionComponent<Props> = (props) => {
+  const tags = ['INC', 'WORK'];
+  const [date, setDate] = React.useState<Dayjs | null>(dayjs(new Date()));
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [tag, setTag] = useState(tags[0]);
+
+  function addItem(
+    name: string,
+    description: string,
+    tag: string,
+    date: Dayjs
+  ) {
+    let newItem = {
+      name,
+      description,
+      tag,
+      date,
+    };
+
+    props.listItems.unshift(newItem);
+    props.setListItems(props.listItems);
+    
+    setDate(dayjs(new Date()));
+    setName("");
+    setDescription("");
+    setTag(tags[0]);
+
+    props.closeModal(props.isOpen);
+  }
+
+
   return (
     <Fragment>
       <Transition appear show={props.isOpen} as={Fragment}>
@@ -47,9 +88,7 @@ const Modal: NextPage<Props> = (props) => {
 
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
-                      Here is where you create your todo list items. Please type
-                      down your todo-item in the Header box, pick a time and
-                      date to complete it.
+                      Here is where you create your todo list items. 
                     </p>
                   </div>
 
@@ -67,6 +106,8 @@ const Modal: NextPage<Props> = (props) => {
                         aria-describedby='helper-text-explanation'
                         className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         placeholder='Create task for team members'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       />
                       <label
                         htmlFor='task-description'
@@ -79,6 +120,8 @@ const Modal: NextPage<Props> = (props) => {
                         rows='4'
                         class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         placeholder='Leave task description here...'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                       ></textarea>
                       <label
                         htmlFor='tags'
@@ -86,30 +129,24 @@ const Modal: NextPage<Props> = (props) => {
                       >
                         Tags
                       </label>
-                      <TagsListBox />
+                      <TagsListBox tag={tag} setTags={setTag} tags={tags} />
                       <label
                         htmlFor='end-date'
-                        className='block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white'
+                        className='block my-4 text-sm font-medium text-gray-900 dark:text-white'
                       >
                         End Date
                       </label>
-                      <BasicDatePicker />
+                      <BasicDatePicker date={date} setDate={setDate} />
                     </form>
                   </div>
 
                   <div className='mt-4 flex justify-end'>
                     <button
                       type='button'
-                      className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
-                      onClick={props.closeModal}
-                    >
-                      Cancel
-                    </button>
-
-                    <button
-                      type='button'
                       className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ml-4'
-                      onClick={props.closeModal}
+                      onClick={(e) => addItem(
+                        name, description, tag, date
+                      )}
                     >
                       Add Item
                     </button>

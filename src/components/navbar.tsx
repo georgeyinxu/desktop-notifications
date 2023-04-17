@@ -15,13 +15,13 @@ const NavBar = () => {
                 className='block h-6 w-6'
                 fill='none'
                 viewBox='0 0 24 24'
-                stroke-width='1.5'
+                strokeWidth='1.5'
                 stroke='currentColor'
                 aria-hidden='true'
               >
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                   d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'
                 />
               </svg>
@@ -29,13 +29,13 @@ const NavBar = () => {
                 className='hidden h-6 w-6'
                 fill='none'
                 viewBox='0 0 24 24'
-                stroke-width='1.5'
+                strokeWidth='1.5'
                 stroke='currentColor'
                 aria-hidden='true'
               >
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                   d='M6 18L18 6M6 6l12 12'
                 />
               </svg>
@@ -63,50 +63,8 @@ const NavBar = () => {
                 >
                   Dashboard
                 </a>
-
-                <a
-                  href='#'
-                  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
-                >
-                  Team
-                </a>
-
-                <a
-                  href='#'
-                  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
-                >
-                  Projects
-                </a>
-
-                <a
-                  href='#'
-                  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
-                >
-                  Calendar
-                </a>
               </div>
             </div>
-          </div>
-          <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-            {/* <div className='flex items-center justify-center h-20 rounded'>
-              <div className='sm:col-span-4'>
-                <div className='flex focus-within:ring-indigo-600 sm:w-96'>
-                  <input
-                    type='text'
-                    name='username'
-                    id='username'
-                    className='block flex-1 border-0 bg-white py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 rounded-md shadow-sm'
-                    placeholder='Type down your task here'
-                  />
-                  <button
-                    type='submit'
-                    className='flex-none rounded-full bg-blue-500 text-xl font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 ml-4 w-10 h-10'
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
@@ -119,27 +77,6 @@ const NavBar = () => {
             aria-current='page'
           >
             Dashboard
-          </a>
-
-          <a
-            href='#'
-            className='text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
-          >
-            Team
-          </a>
-
-          <a
-            href='#'
-            className='text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
-          >
-            Projects
-          </a>
-
-          <a
-            href='#'
-            className='text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
-          >
-            Calendar
           </a>
         </div>
       </div>
