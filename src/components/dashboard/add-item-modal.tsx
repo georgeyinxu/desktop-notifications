@@ -16,21 +16,21 @@ type Props = {
   isOpen: boolean | any;
   closeModal: (value: boolean) => void;
   listItems: ListItem[];
-  setListItems: React.Dispatch<React.SetStateAction<ListItem[]>>
+  setListItems: React.Dispatch<React.SetStateAction<ListItem[]>>;
 };
 
 const Modal: FunctionComponent<Props> = (props) => {
   const tags = ['INC', 'WORK'];
   const [date, setDate] = React.useState<Dayjs | null>(dayjs(new Date()));
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [tag, setTag] = useState(tags[0]);
 
   function addItem(
     name: string,
     description: string,
     tag: string,
-    date: Dayjs
+    date: Dayjs | null
   ) {
     let newItem = {
       name,
@@ -41,15 +41,27 @@ const Modal: FunctionComponent<Props> = (props) => {
 
     props.listItems.unshift(newItem);
     props.setListItems(props.listItems);
-    
+
+    Notification.requestPermission().then((perm) => {
+      if (perm === 'granted') {
+        const notification = new Notification('Created a new reminder', {
+          body: description,
+          data: description
+        });
+
+        notification.addEventListener('close', (e) => {
+          console.log(e);
+        });
+      }
+    });
+
     setDate(dayjs(new Date()));
-    setName("");
-    setDescription("");
+    setName('');
+    setDescription('');
     setTag(tags[0]);
 
     props.closeModal(props.isOpen);
   }
-
 
   return (
     <Fragment>
@@ -88,7 +100,7 @@ const Modal: FunctionComponent<Props> = (props) => {
 
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
-                      Here is where you create your todo list items. 
+                      Here is where you create your todo list items.
                     </p>
                   </div>
 
@@ -144,9 +156,7 @@ const Modal: FunctionComponent<Props> = (props) => {
                     <button
                       type='button'
                       className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ml-4'
-                      onClick={(e) => addItem(
-                        name, description, tag, date
-                      )}
+                      onClick={(e) => addItem(name, description, tag, date)}
                     >
                       Add Item
                     </button>

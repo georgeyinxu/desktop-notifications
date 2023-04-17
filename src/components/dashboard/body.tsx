@@ -17,12 +17,10 @@ const Body = () => {
   let [listItems, setListItems] = React.useState<Array<ListItem>>([]);
 
   function closeModal() {
-    console.log(listItems);
     setIsOpen(false);
   }
 
   function openModal() {
-    console.log(listItems);
     setIsOpen(true);
   }
 
@@ -43,9 +41,7 @@ const Body = () => {
                 key={index}
               >
                 <div className='flex justify-between'>
-                  <div className='text-md font-medium'>
-                    {item.name}
-                  </div>
+                  <div className='text-md font-medium'>{item.name}</div>
                   <button
                     className='bg-red-100 text-red-800 text-sm font-medium rounded-full dark:bg-red-900 dark:text-red-300 w-6 h-6 flex justify-center items-center'
                     onClick={removeItem}
@@ -58,9 +54,7 @@ const Body = () => {
                 </div>
 
                 <div className='mt-2'>
-                  <p className='text-sm text-gray-500'>
-                    {item.description}
-                  </p>
+                  <p className='text-sm text-gray-500'>{item.description}</p>
                 </div>
 
                 <div className='flex mt-2 justify-between'>
@@ -72,7 +66,7 @@ const Body = () => {
                       className='h-4 w-4 mt-0.5 text-yellow-800'
                       aria-hidden='true'
                     />
-                    <span className='ml-2'>8 June 2004</span>
+                    <span className='ml-2'>{dayjs(item.date).toString()}</span>
                   </span>
                 </div>
               </div>
@@ -91,7 +85,12 @@ const Body = () => {
         </div>
       </div>
 
-      <Modal isOpen={isOpen} closeModal={closeModal} listItems={listItems} setListItems={setListItems} />
+      <Modal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        listItems={listItems}
+        setListItems={setListItems}
+      />
     </div>
   );
 };
